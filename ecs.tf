@@ -55,7 +55,7 @@ locals {
 
       portMappings = [
         {
-          containerPort = 80
+          containerPort = 443
         },
       ]
 
