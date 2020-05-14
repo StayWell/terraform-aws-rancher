@@ -108,7 +108,7 @@ resource "aws_lb_target_group" "this" {
 
   health_check {
     path    = "/"
-    matcher = "200, 302"
+    matcher = "200,302"
   }
 
   lifecycle {
