@@ -33,7 +33,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "hub_image" {
+variable "image" {
   description = "(Optional) https://hub.docker.com/r/rancher/rancher"
   default     = "rancher/rancher"
 }

@@ -4,6 +4,7 @@ module "this" {
   private_subnet_ids = ["${aws_subnet.a.id}", "${aws_subnet.b.id}"]
   vpc_id             = aws_vpc.this.id
   domain             = "this.company.com"
+  certificate_arn    = "blah"
   zone_id            = "blah"
 }
 
