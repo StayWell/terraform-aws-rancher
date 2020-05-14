@@ -99,7 +99,7 @@ resource "aws_iam_role_policy_attachment" "ecs" {
 }
 
 resource "aws_lb_target_group" "this" {
-  name_prefix = var.id
+  name_prefix = "${substr(var.id, 0, 5)}-"
   port        = local.container[0].portMappings[0].containerPort
   protocol    = "HTTP"
   vpc_id      = var.vpc_id

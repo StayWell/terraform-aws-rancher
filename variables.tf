@@ -27,11 +27,6 @@ variable "id" {
   default     = "rancher"
 }
 
-variable "short_id" {
-  description = "(Optional) Short identifier for naming resources that have strict length requirements"
-  default     = "ran"
-}
-
 variable "ssl_policy" {
   description = "(Optional) https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html"
   default     = "ELBSecurityPolicy-TLS-1-2-2017-01"

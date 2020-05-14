@@ -1,5 +1,5 @@
 resource "aws_lb" "this" {
-  name_prefix     = "${var.short_id}-"
+  name_prefix     = "${substr(var.id, 0, 5)}-"
   security_groups = ["${aws_security_group.alb.id}"]
   subnets         = tolist(var.public_subnet_ids)
   tags            = var.tags
@@ -59,7 +59,7 @@ resource "aws_lb_listener" "https" {
 }
 
 resource "aws_s3_bucket" "this" {
-  bucket_prefix = "${var.short_id}-"
+  bucket_prefix = "${substr(var.id, 0, 5)}-"
   acl           = "private"
   force_destroy = ! var.protection
   tags          = var.tags
