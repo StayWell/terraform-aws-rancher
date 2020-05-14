@@ -99,7 +99,7 @@ resource "aws_iam_role_policy_attachment" "ecs" {
 }
 
 resource "aws_lb_target_group" "this" {
-  name        = var.id
+  name_prefix = var.id
   port        = local.container[0].portMappings[0].containerPort
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
@@ -108,6 +108,10 @@ resource "aws_lb_target_group" "this" {
 
   health_check {
     path = "/"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
