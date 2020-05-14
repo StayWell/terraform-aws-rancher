@@ -55,7 +55,7 @@ locals {
 
       portMappings = [
         {
-          containerPort = 443
+          containerPort = 80
         },
       ]
 
@@ -107,7 +107,8 @@ resource "aws_lb_target_group" "this" {
   tags        = var.tags
 
   health_check {
-    path = "/"
+    path    = "/"
+    matcher = "200, 302"
   }
 
   lifecycle {
