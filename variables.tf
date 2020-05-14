@@ -32,6 +32,11 @@ variable "short_id" {
   default     = "ran"
 }
 
+variable "ssl_policy" {
+  description = "(Optional) https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html"
+  default     = "ELBSecurityPolicy-TLS-1-2-2017-01"
+}
+
 variable "tags" {
   description = "(Optional) Tags applied to all resources"
   default     = {}
