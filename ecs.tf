@@ -24,7 +24,7 @@ resource "aws_ecs_service" "this" {
   name                              = var.id
   cluster                           = aws_ecs_cluster.this.id
   task_definition                   = aws_ecs_task_definition.this.arn
-  desired_count                     = var.desired_count
+  desired_count                     = 1
   launch_type                       = "FARGATE"
   propagate_tags                    = "SERVICE"
   health_check_grace_period_seconds = 30
