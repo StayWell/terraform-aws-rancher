@@ -18,6 +18,10 @@ variable "vpc_id" {
   description = "(Required) https://www.terraform.io/docs/providers/aws/r/security_group.html#vpc_id"
 }
 
+variable "certificate_arn" {
+  description = "(Required) https://www.terraform.io/docs/providers/aws/r/lb_listener.html#certificate_arn"
+}
+
 variable "id" {
   description = "(Optional) Unique identifier for naming resources"
   default     = "rancher"
