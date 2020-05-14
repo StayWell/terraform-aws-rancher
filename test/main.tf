@@ -1,6 +1,7 @@
 module "this" {
   source             = "../"
-  subnet_ids = ["${aws_subnet.a.id}","${aws_subnet.b.id}"]
+  public_subnet_ids  = ["${aws_subnet.a.id}", "${aws_subnet.b.id}"]
+  private_subnet_ids = ["${aws_subnet.a.id}", "${aws_subnet.b.id}"]
   vpc_id             = aws_vpc.this.id
   domain             = "this.company.com"
   zone_id            = "blah"
