@@ -18,10 +18,19 @@ resource "aws_ecs_task_definition" "this" {
   cpu                      = var.cpu
   memory                   = var.memory
   tags                     = var.tags
+
+  volume {
+    name = "this"
+
+    efs_volume_configuration {
+      file_system_id = aws_efs_file_system.this.id
+    }
+  }
 }
 
 resource "aws_ecs_service" "this" {
   name                              = var.id
+  platform_version                  = "1.4.0"
   cluster                           = aws_ecs_cluster.this.id
   task_definition                   = aws_ecs_task_definition.this.arn
   desired_count                     = 1
@@ -59,6 +68,13 @@ locals {
         },
       ]
 
+      mountPoints = [
+        {
+          sourceVolume = "this"
+          containerPath = "/var/lib/rancher"
+        },
+      ]
+
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -70,6 +86,19 @@ locals {
       }
     }
   ]
+}
+
+resource "aws_efs_file_system" "this" {
+  creation_token = var.id
+  encrypted      = true
+  tags           = var.tags
+}
+
+resource "aws_efs_mount_target" "this" {
+  count           = length(var.private_subnet_ids)
+  file_system_id  = aws_efs_file_system.this.id
+  subnet_id       = element(var.private_subnet_ids, count.index)
+  security_groups = [aws_security_group.ecs.id]
 }
 
 resource "aws_iam_role" "this" {
