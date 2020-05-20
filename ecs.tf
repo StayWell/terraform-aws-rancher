@@ -70,7 +70,7 @@ locals {
 
       mountPoints = [
         {
-          sourceVolume = "this"
+          sourceVolume  = "this"
           containerPath = "/var/lib/rancher"
         },
       ]
@@ -95,9 +95,9 @@ resource "aws_efs_file_system" "this" {
 }
 
 resource "aws_efs_mount_target" "this" {
-  count           = length(var.private_subnet_ids)
+  for_each        = var.private_subnet_ids
   file_system_id  = aws_efs_file_system.this.id
-  subnet_id       = element(var.private_subnet_ids, count.index)
+  subnet_id       = each.value
   security_groups = [aws_security_group.ecs.id]
 }
 
