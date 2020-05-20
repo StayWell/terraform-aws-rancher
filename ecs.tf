@@ -95,7 +95,7 @@ resource "aws_efs_file_system" "this" {
 }
 
 resource "aws_efs_mount_target" "this" {
-  for_each        = var.private_subnet_ids
+  for_each        = tolist(var.private_subnet_ids)
   file_system_id  = aws_efs_file_system.this.id
   subnet_id       = each.value
   security_groups = [aws_security_group.ecs.id]
