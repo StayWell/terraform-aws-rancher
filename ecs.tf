@@ -89,9 +89,8 @@ locals {
 }
 
 resource "aws_efs_file_system" "this" {
-  creation_token = var.id
-  encrypted      = true
-  tags           = var.tags
+  encrypted = true
+  tags      = merge(var.tags, {name = var.id })
 }
 
 resource "aws_efs_mount_target" "this" {
