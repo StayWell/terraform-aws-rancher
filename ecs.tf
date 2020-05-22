@@ -90,7 +90,7 @@ locals {
 
 resource "aws_efs_file_system" "this" {
   encrypted = true
-  tags      = merge(var.tags, {Name = var.id })
+  tags      = merge(var.tags, { Name = var.id })
 }
 
 resource "aws_efs_mount_target" "this" {
@@ -205,4 +205,14 @@ resource "aws_security_group_rule" "ecs_ingress_alb" {
   protocol                 = "-1"
   security_group_id        = aws_security_group.ecs.id
   source_security_group_id = aws_security_group.alb.id
+}
+
+resource "aws_security_group_rule" "ecs_ingress_self" {
+  description       = "Self"
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.ecs.id
+  self              = true
 }
