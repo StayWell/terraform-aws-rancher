@@ -90,7 +90,7 @@ locals {
 
 resource "aws_efs_file_system" "this" {
   encrypted = true
-  tags      = merge(var.tags, {name = var.id })
+  tags      = merge(var.tags, {Name = var.id })
 }
 
 resource "aws_efs_mount_target" "this" {
